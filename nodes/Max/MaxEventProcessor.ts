@@ -74,6 +74,14 @@ export class MaxEventProcessor {
 	 * @returns Promise resolving to webhook response data with workflow trigger information
 	 */
 	async processWebhookEvent(this: IWebhookFunctions): Promise<IWebhookResponseData> {
+		const headers = this.getHeaderData();
+		const secret = (this.getNodeParameter('additionalFields') as any)?.secret;
+		if (secret) {
+    		const incoming = headers['x-max-bot-api-secret'];
+   			if (incoming !== secret) {
+        		return { workflowData: [] };
+    		}
+		}
 		const processor = new MaxEventProcessor();
 
 		try {
