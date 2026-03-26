@@ -82,22 +82,17 @@ export class MaxEventProcessor {
 			const additionalFields = this.getNodeParameter('additionalFields') as IDataObject;
 			const events = this.getNodeParameter('events') as MaxTriggerEvent[];
 
-			console.log('Max Trigger - Processing webhook event');
-
 			// Validate body data
 			if (!bodyData) {
-				console.log('Max Trigger - No body data received');
 				return { workflowData: [] };
 			}
 
 			// Extract and validate event type
 			const eventType = bodyData.update_type;
 			if (!eventType) {
-				console.log('Max Trigger - No event type found in webhook body');
 				return { workflowData: [] };
 			} // Filter by event type
 			if (!events.includes(eventType as MaxTriggerEvent)) {
-				console.log(`Max Trigger - Event type '${eventType}' filtered out`);
 				return { workflowData: [] };
 			}
 
@@ -105,8 +100,6 @@ export class MaxEventProcessor {
 			if (!processor.passesAdditionalFilters(bodyData, additionalFields)) {
 				return { workflowData: [] };
 			}
-
-			console.log('Max Trigger - Event passed filters, triggering workflow');
 
 			// Process event-specific data and normalize
 			const normalizedData = processor.processEventSpecificData(bodyData, eventType);
@@ -116,7 +109,6 @@ export class MaxEventProcessor {
 			};
 		} catch (error) {
 			// Log error but don't throw - return empty response to avoid webhook recreation
-			console.log('Max Trigger - Error processing webhook:', error);
 			return { workflowData: [] };
 		}
 	}
@@ -144,7 +136,6 @@ export class MaxEventProcessor {
 
 			return true;
 		} catch (filterError) {
-			console.log('Max Trigger - Error in filtering, proceeding without filters:', filterError);
 			// Continue processing even if filtering fails
 			return true;
 		}
@@ -196,10 +187,6 @@ export class MaxEventProcessor {
 
 		const isAllowed = chatIds.includes(String(chatId));
 
-		if (!isAllowed) {
-			console.log(`Max Trigger - Chat ID ${chatId} filtered out`);
-		}
-
 		return isAllowed;
 	}
 
@@ -231,10 +218,6 @@ export class MaxEventProcessor {
 		}
 
 		const isAllowed = userIds.includes(String(userId));
-
-		if (!isAllowed) {
-			console.log(`Max Trigger - User ID ${userId} filtered out`);
-		}
 
 		return isAllowed;
 	}

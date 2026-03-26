@@ -6,7 +6,7 @@ import type {
 	JsonObject,
 } from 'n8n-workflow';
 import { NodeApiError, NodeOperationError } from 'n8n-workflow';
-import { Bot } from '@maxhub/max-bot-api';
+import { Bot } from '@blackzeshi/max-bot-api';
 import { randomUUID } from 'crypto';
 import { tmpdir } from 'os';
 import { basename, join } from 'path';
