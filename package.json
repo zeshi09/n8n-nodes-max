@@ -8,11 +8,11 @@
 	"license": "MIT",
 	"homepage": "",
 	"author": {
-		"name": "Pavel Frankov"
+		"name": "svz"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/pfrankov/n8n-nodes-max.git"
+		"url": "https://github.com/zeshi09/n8n-nodes-max.git"
 	},
 	"engines": {
 		"node": ">=20.15"
@@ -63,7 +63,7 @@
 		"typescript": "^5.8.2"
 	},
 	"dependencies": {
-		"@maxhub/max-bot-api": "^0.2.1"
+		"@blackzeshi/max-bot-api": "1.0.0"
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
